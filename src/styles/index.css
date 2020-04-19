@@ -1,0 +1,21 @@
+body {
+  height: 97vh;
+  background: linear-gradient(to right, #1d2b64, #f8cdda);
+}
+
+.card {
+  background: linear-gradient(to right, #ece9e6, #ffffff);
+}
+
+a {
+  text-decoration: none;
+}
+
+#scroll::-webkit-scrollbar {
+  display: none;
+}
+
+#scroll{
+    scrollbar-width: none;
+}
+
