@@ -9,7 +9,7 @@ export enum FONT {
   SOURCE_SANS = 'Source Sans Pro, sans-serif',
   DANCING_SCRIPT = 'Dancing Script, cursive',
   SHADOW = 'Shadows Into Light, cursive',
-  DEFAULT = 'Roboto, Helvetica, Arial, sans-serif',
+  DEFAULT = 'Roboto, Helvetica, Arial, sans-serif'
 }
 
 export enum COLOR {
@@ -17,7 +17,7 @@ export enum COLOR {
   BROWN = '#a52a2a',
   BLUE = '#0000ff',
   DEFAULT = 'rgba(0, 0, 0, 0.87)',
-  CRIMSON = '#ed143d',
+  CRIMSON = '#ed143d'
 }
 
 export class FormatOptions extends React.PureComponent<Props, State> {
@@ -78,20 +78,20 @@ export class FormatOptions extends React.PureComponent<Props, State> {
           anchorPosition={{ top: 105, left: 50 }}
           anchorOrigin={{
             vertical: 'top',
-            horizontal: 'left',
+            horizontal: 'left'
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'left',
+            horizontal: 'left'
           }}
-          onClose={this.togglePopover}
+          onClose={() => this.togglePopover(1)}
           open={this.state.toggleFontPopover}
         >
           <Card style={{ display: 'flex', flexDirection: 'column' }}>
             <Button
               style={{
                 background: 'whitesmoke',
-                borderRadius: '0px',
+                borderRadius: '0px'
               }}
               variant='contained'
               onClick={() => {
@@ -107,7 +107,7 @@ export class FormatOptions extends React.PureComponent<Props, State> {
               style={{
                 fontFamily: 'Source Sans Pro, sans-serif',
                 background: 'whitesmoke',
-                borderRadius: '0px',
+                borderRadius: '0px'
               }}
               variant='contained'
               onClick={() => {
@@ -123,7 +123,7 @@ export class FormatOptions extends React.PureComponent<Props, State> {
               style={{
                 fontFamily: 'Dancing Script, cursive',
                 background: 'whitesmoke',
-                borderRadius: '0px',
+                borderRadius: '0px'
               }}
               variant='contained'
               onClick={() => {
@@ -139,7 +139,7 @@ export class FormatOptions extends React.PureComponent<Props, State> {
               style={{
                 fontFamily: 'Shadows Into Light, cursive',
                 background: 'whitesmoke',
-                borderRadius: '0px',
+                borderRadius: '0px'
               }}
               variant='contained'
               onClick={() => {
@@ -169,13 +169,13 @@ export class FormatOptions extends React.PureComponent<Props, State> {
           anchorPosition={{ top: 105, left: 140 }}
           anchorOrigin={{
             vertical: 'top',
-            horizontal: 'center',
+            horizontal: 'center'
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'left',
+            horizontal: 'left'
           }}
-          onClose={() => {this.togglePopover(2)}}
+          onClose={() => {this.togglePopover(2);}}
           open={this.state.toggleColorPopover}
         >
           <Card style={{ display: 'flex', flexDirection: 'column' }}>
