@@ -4,13 +4,14 @@ import { Labels } from './Labels';
 
 export const TaskLabel: React.FunctionComponent<Props> = () => {
   const [popover, setPopover] = React.useState<boolean>(false);
+  const [labelColor, setLabelColor] = React.useState<string>('gray');
   const LabelButton = (
     <div
       style={{
         height: '20px',
         width: '20px',
         position: 'relative',
-        background: 'yellowgreen',
+        background: labelColor,
         borderRadius: '50%',
         cursor: 'pointer',
         boxShadow: '4px 1px 8px grey',
@@ -18,6 +19,10 @@ export const TaskLabel: React.FunctionComponent<Props> = () => {
       onClick={() => setPopover(!popover)}
     ></div>
   );
+
+  const changeLabelColor = (e: string) => {
+    setLabelColor(e);
+  }
   return (
     <>
       <Tooltip title='Label It!'>
@@ -36,8 +41,9 @@ export const TaskLabel: React.FunctionComponent<Props> = () => {
         }}
         onClose={() => setPopover(!popover)}
         open={popover}
-      >
-        <Labels />
+      ><div style={{display: 'flex', flexDirection: 'column'}}>
+        <Labels setColor={changeLabelColor} togglePopover={() => setPopover(!popover)}/>
+        </div>
       </Popover>
     </>
   );
