@@ -5,13 +5,12 @@ import {
   CardContent,
   TextField,
   IconButton,
-  Tooltip,
   Popover
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import '../styles/index.css';
-import { Labels } from './Labels';
+import { LabelsCollapse } from './LabelsCollapse';
 import { TaskLabel } from './TaskLabel';
 
 export class TodoCard extends React.Component<Props, State> {
@@ -121,7 +120,7 @@ export class TodoCard extends React.Component<Props, State> {
           ))}
         </Container>
       </div>,
-      <Labels />
+      <LabelsCollapse />
     ];
   }
 }
