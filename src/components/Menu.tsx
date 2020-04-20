@@ -12,6 +12,7 @@ export class Menu extends React.PureComponent<Props, {}> {
           position: 'sticky',
           top: 0,
           marginBottom: '3vh',
+          zIndex: 1
         }}
       >
         <CardContent

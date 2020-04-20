@@ -12,6 +12,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import '../styles/index.css';
 import { Labels } from './Labels';
+import { TaskLabel } from './TaskLabel';
 
 export class TodoCard extends React.Component<Props, State> {
   constructor(props) {
@@ -71,19 +72,8 @@ export class TodoCard extends React.Component<Props, State> {
               className='card'
               key={ind}
               style={{ marginBottom: '5px', borderRadius: '0px' }}
-            ><Tooltip title='Label It!'>
-              <div
-                style={{
-                  height: '20px',
-                  width: '20px',
-                  position: 'relative',
-                  background: 'yellowgreen',
-                  borderRadius: '50%',
-                  cursor: 'pointer',
-                  boxShadow: '4px 1px 8px grey',
-                }}
-              ></div>
-              </Tooltip>
+            >
+              <TaskLabel />
               <Popover
                 anchorReference='anchorPosition'
                 anchorPosition={{ top: 105, left: 50 }}
@@ -98,15 +88,12 @@ export class TodoCard extends React.Component<Props, State> {
                 // onClose={this.togglePopover}
                 open={false}
               >
-                <Card style={{ display: 'flex', flexDirection: 'column' }}>
-
-                </Card>
+                <Card
+                  style={{ display: 'flex', flexDirection: 'column' }}
+                ></Card>
               </Popover>
-              
-              <CardContent
-                key={ind}
-                style={{ marginTop: '-20px' }}
-              >
+
+              <CardContent key={ind} style={{ marginTop: '-20px' }}>
                 <IconButton
                   style={{ marginRight: '5px', color: 'firebrick' }}
                   onClick={(e) => this.removeElement(ind)}
@@ -127,7 +114,7 @@ export class TodoCard extends React.Component<Props, State> {
                   <AddIcon />
                 </IconButton>
               </CardContent>
-                {/* <Tooltip title='Schedule It!'>
+              {/* <Tooltip title='Schedule It!'>
               <TextField style={{ height: '26px' }} type='date' />
               </Tooltip> */}
             </Card>

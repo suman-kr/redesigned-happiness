@@ -4,7 +4,8 @@ import {
   Card,
   CardContent,
   TextField,
-  Typography
+  Typography,
+  Button
 } from '@material-ui/core';
 import { FormatOptions, FONT, COLOR } from './FormatOptions';
 
@@ -16,7 +17,8 @@ export class Notepad extends React.PureComponent<{}, State> {
     fontBold: false,
     fontItalics: false,
     fontSize: false,
-    selectedColor: COLOR.DEFAULT
+    selectedColor: COLOR.DEFAULT,
+    notesText: '',
   };
   countChars = (e: string) => {
     this.setState({ countChars: e.length });
@@ -89,6 +91,14 @@ export class Notepad extends React.PureComponent<{}, State> {
     this.setState({ fontSize: !this.state.fontSize });
   }
 
+  onChange = (e: string) => {
+    this.setState({notesText: e});
+  }
+
+  clear = () => {
+    this.setState({notesText: '', countChars: 0, countWords: 0});
+  }
+
   render() {
     return (
       <Container>
@@ -109,7 +119,9 @@ export class Notepad extends React.PureComponent<{}, State> {
               onChange={(e) => {
                 this.countChars(e.target.value);
                 this.countWords(e.target.value);
+                this.onChange(e.target.value);
               }}
+              value={this.state.notesText}
               inputProps={{
                 style: {
                   fontFamily: this.state.selectedFont,
@@ -130,6 +142,19 @@ export class Notepad extends React.PureComponent<{}, State> {
               Words: {this.state.countWords}
             </Typography>
           </CardContent>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            paddingBottom: '10px',
+            marginTop: '-10px'
+          }}>
+          <Button variant='contained' color='primary' style={{borderRadius: '0px', margin: 'auto'}}>
+            Save
+          </Button>
+          <Button variant='contained' color='secondary' style={{borderRadius: '0px', margin: 'auto'}} onClick={this.clear}>
+            Clear
+          </Button>
+          </div>
         </Card>
       </Container>
     );
@@ -144,4 +169,5 @@ interface State {
   fontItalics: boolean;
   fontSize: boolean;
   selectedColor: COLOR;
+  notesText: string;
 }
