@@ -13,7 +13,6 @@ export class Labels extends React.PureComponent<Props, State> {
             if (this.props.togglePopover) this.props.togglePopover();
             if (this.props.filterCard) this.props.filterCard('#3f51b5');
             if (this.props.onChangeTaskLabel)
-              if (this.props.index)
                 this.props.onChangeTaskLabel(this.props.index, '#3f51b5');
           }}
         >
@@ -28,7 +27,6 @@ export class Labels extends React.PureComponent<Props, State> {
             if (this.props.togglePopover) this.props.togglePopover();
             if (this.props.filterCard) this.props.filterCard('#f50057');
             if (this.props.onChangeTaskLabel)
-              if (this.props.index)
                 this.props.onChangeTaskLabel(this.props.index, '#f50057');
           }}
         >
@@ -42,7 +40,6 @@ export class Labels extends React.PureComponent<Props, State> {
             if (this.props.togglePopover) this.props.togglePopover();
             if (this.props.filterCard) this.props.filterCard('yellowgreen');
             if (this.props.onChangeTaskLabel)
-              if (this.props.index)
                 this.props.onChangeTaskLabel(this.props.index, 'yellowgreen');
           }}
         >
