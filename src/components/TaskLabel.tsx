@@ -48,6 +48,7 @@ export const TaskLabel: React.FunctionComponent<Props> = (props) => {
             togglePopover={() => setPopover(!popover)}
             onChangeTaskLabel={props.onChangeTaskLabel}
             index={props.index}
+            showRemoveFilter={0}
           />
         </div>
       </Popover>

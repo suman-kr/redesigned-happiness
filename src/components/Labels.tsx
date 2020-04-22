@@ -48,7 +48,7 @@ export class Labels extends React.PureComponent<Props, State> {
         >
           Later
         </Button>
-        <Button
+        {this.props.showRemoveFilter === 1 &&  <Button
           variant='contained'
           style={{ marginBottom: '5px', backgroundColor: 'gray' }}
           disableRipple
@@ -60,6 +60,7 @@ export class Labels extends React.PureComponent<Props, State> {
         >
           Remove Filter
         </Button>
+        }
       </>
     );
   }
@@ -74,4 +75,5 @@ interface Props {
   onChangeTaskLabel?: (e: number, i: string) => void;
   index?: number;
   unsetFilter?: () => void;
+  showRemoveFilter: number;
 }

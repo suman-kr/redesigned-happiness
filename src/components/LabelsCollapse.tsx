@@ -30,6 +30,7 @@ export class LabelsCollapse extends React.PureComponent<Props, {}> {
             <Labels
               filterCard={this.props.filterCard}
               unsetFilter={this.props.unsetFilter}
+              showRemoveFilter={1}
             />
           </ExpansionPanelDetails>
         </ExpansionPanel>
