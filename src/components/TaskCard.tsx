@@ -4,8 +4,7 @@ import {
   Card,
   CardContent,
   TextField,
-  IconButton,
-  Popover
+  IconButton
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -17,14 +16,18 @@ export class TodoCard extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      items: ['']
+      items: [''],
+      filter: [{ display: 'block', color: 'gray' }]
     };
   }
 
   newElement = (i: number) => {
     let { items } = this.state;
+    let { filter } = this.state;
+    filter.splice(i, 0, { display: 'block', color: 'gray' });
     items.splice(i, 0, '');
-    this.setState({ items });
+    this.setState({ items , filter});
+    console.log(this.state.items, this.state.filter)
     this.props.onTaskAdd(items.length);
   }
 
@@ -36,15 +39,38 @@ export class TodoCard extends React.Component<Props, State> {
 
   removeElement = (ind: number) => {
     let { items } = this.state;
-    const a = (i: number) => {
-      items.splice(0, items.length - 1);
+    let { filter } = this.state;
+    const retainOneTask = (i: number) => {
+      items.splice(0, items.length - 1)
       items[i] = '';
+      filter.splice(0, filter.length - 1)
+      filter[i] = { display: 'block', color: 'gray' };
     };
-    items.length !== 1 ? items.splice(ind, 1) : a(ind);
+    const updateTask = (ind: number) => {
+      items.splice(ind, 1);
+      filter.splice(ind, 1);
+    };
+    items.length !== 1 ? updateTask(ind) : retainOneTask(ind);
     this.setState({
       items
     });
     this.props.onTaskAdd(items.length);
+  }
+
+  filterFunction = (color: string) => {
+    let { filter } = this.state;
+    filter.map((e, ind) => {
+      if (e.color !== color) {
+        filter[ind] = { display: 'none', color: color };
+        this.setState({filter});
+      }
+    });
+  }
+
+  onChangeTaskLabel = (ind: number, color: string) => {
+    let {filter} = this.state;
+    filter[ind] = {display: 'block', color: color};
+    this.setState({filter});
   }
 
   render() {
@@ -70,28 +96,13 @@ export class TodoCard extends React.Component<Props, State> {
             <Card
               className='card'
               key={ind}
-              style={{ marginBottom: '5px', borderRadius: '0px' }}
+              style={{
+                marginBottom: '5px',
+                borderRadius: '0px',
+                display: this.state.filter[ind].display
+              }}
             >
-              <TaskLabel />
-              <Popover
-                anchorReference='anchorPosition'
-                anchorPosition={{ top: 105, left: 50 }}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                // onClose={this.togglePopover}
-                open={false}
-              >
-                <Card
-                  style={{ display: 'flex', flexDirection: 'column' }}
-                ></Card>
-              </Popover>
-
+              <TaskLabel index={ind} onChangeTaskLabel={ this.onChangeTaskLabel}/>
               <CardContent key={ind} style={{ marginTop: '-20px' }}>
                 <IconButton
                   style={{ marginRight: '5px', color: 'firebrick' }}
@@ -113,20 +124,18 @@ export class TodoCard extends React.Component<Props, State> {
                   <AddIcon />
                 </IconButton>
               </CardContent>
-              {/* <Tooltip title='Schedule It!'>
-              <TextField style={{ height: '26px' }} type='date' />
-              </Tooltip> */}
             </Card>
           ))}
         </Container>
       </div>,
-      <LabelsCollapse />
+      <LabelsCollapse filterCard={this.filterFunction}/>
     ];
   }
 }
 
 interface State {
   items: string[];
+  filter: [{ display: string; color: string }];
 }
 
 interface Props {

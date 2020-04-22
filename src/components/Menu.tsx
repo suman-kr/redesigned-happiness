@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Card, CardContent, Button, Tooltip } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { TodoCard } from './TodoCard';
 export class Menu extends React.PureComponent<Props, {}> {
   render() {
     return (

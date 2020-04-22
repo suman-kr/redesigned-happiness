@@ -2,11 +2,12 @@ import * as React from 'react';
 import { Tooltip, Popover } from '@material-ui/core';
 import { Labels } from './Labels';
 
-export const TaskLabel: React.FunctionComponent<Props> = () => {
+export const TaskLabel: React.FunctionComponent<Props> = (props) => {
   const [popover, setPopover] = React.useState<boolean>(false);
   const [labelColor, setLabelColor] = React.useState<string>('gray');
   const LabelButton = (
     <div
+      className={`label-${props.index}`}
       style={{
         height: '20px',
         width: '20px',
@@ -17,6 +18,7 @@ export const TaskLabel: React.FunctionComponent<Props> = () => {
         boxShadow: '4px 1px 8px grey',
       }}
       onClick={() => setPopover(!popover)}
+      data-ind={props.index}
     ></div>
   );
 
@@ -42,11 +44,14 @@ export const TaskLabel: React.FunctionComponent<Props> = () => {
         onClose={() => setPopover(!popover)}
         open={popover}
       ><div style={{display: 'flex', flexDirection: 'column'}}>
-        <Labels setColor={changeLabelColor} togglePopover={() => setPopover(!popover)}/>
+        <Labels setColor={changeLabelColor} togglePopover={() => setPopover(!popover)} updateTaskLabel={props.onChangeTaskLabel} index={props.index}/>
         </div>
       </Popover>
     </>
   );
 };
 
-interface Props {}
+interface Props {
+  index: number;
+  onChangeTaskLabel: (e: number, v: string) => void;
+}

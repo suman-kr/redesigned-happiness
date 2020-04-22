@@ -14,7 +14,7 @@ export const buttonStyle: React.CSSProperties = {
   marginBottom: '5px'
 }
 
-export class LabelsCollapse extends React.PureComponent<{}, {}> {
+export class LabelsCollapse extends React.PureComponent<Props, {}> {
   
   render() {
     return (
@@ -24,10 +24,14 @@ export class LabelsCollapse extends React.PureComponent<{}, {}> {
             <Typography>Labels</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails style={{ flexDirection: "column", padding: '5px'}}>
-            <Labels />
+            <Labels filterCard={this.props.filterCard}/>
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </Card>
     );
   }
+}
+
+interface Props{
+  filterCard: (e: string) => void;
 }

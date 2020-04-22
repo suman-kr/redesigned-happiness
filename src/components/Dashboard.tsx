@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { TodoCard } from './TodoCard';
+import { TodoCard } from './TaskCard';
 import { Notepad } from './Notepad';
 import '../styles/index.css';
 import { Menu } from './Menu';
