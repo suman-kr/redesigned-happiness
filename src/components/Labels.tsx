@@ -12,9 +12,9 @@ export class Labels extends React.PureComponent<Props, State> {
             if (this.props.setColor) this.props.setColor('#3f51b5');
             if (this.props.togglePopover) this.props.togglePopover();
             if (this.props.filterCard) this.props.filterCard('#3f51b5');
-            if (this.props.updateTaskLabel)
+            if (this.props.onChangeTaskLabel)
               if (this.props.index)
-                this.props.updateTaskLabel(this.props.index, '#3f51b5');
+                this.props.onChangeTaskLabel(this.props.index, '#3f51b5');
           }}
         >
           Urgent
@@ -27,9 +27,9 @@ export class Labels extends React.PureComponent<Props, State> {
             if (this.props.setColor) this.props.setColor('#f50057');
             if (this.props.togglePopover) this.props.togglePopover();
             if (this.props.filterCard) this.props.filterCard('#f50057');
-            if (this.props.updateTaskLabel)
+            if (this.props.onChangeTaskLabel)
               if (this.props.index)
-                this.props.updateTaskLabel(this.props.index, '#f50057');
+                this.props.onChangeTaskLabel(this.props.index, '#f50057');
           }}
         >
           Work
@@ -41,12 +41,24 @@ export class Labels extends React.PureComponent<Props, State> {
             if (this.props.setColor) this.props.setColor('yellowgreen');
             if (this.props.togglePopover) this.props.togglePopover();
             if (this.props.filterCard) this.props.filterCard('yellowgreen');
-            if (this.props.updateTaskLabel)
+            if (this.props.onChangeTaskLabel)
               if (this.props.index)
-                this.props.updateTaskLabel(this.props.index, 'yellowgreen');
+                this.props.onChangeTaskLabel(this.props.index, 'yellowgreen');
           }}
         >
           Later
+        </Button>
+        <Button
+          variant='contained'
+          style={{ marginBottom: '5px', backgroundColor: 'gray' }}
+          disableRipple
+          disableTouchRipple
+          onClick={() => {
+            if (this.props.togglePopover) this.props.togglePopover();
+            if (this.props.unsetFilter) this.props.unsetFilter();
+          }}
+        >
+          Remove Filter
         </Button>
       </>
     );
@@ -59,6 +71,7 @@ interface Props {
   setColor?: (e: string) => void;
   togglePopover?: () => void;
   filterCard?: (e: string) => void;
-  updateTaskLabel?: (e: number, i: string) => void;
+  onChangeTaskLabel?: (e: number, i: string) => void;
   index?: number;
+  unsetFilter?: () => void;
 }

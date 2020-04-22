@@ -24,12 +24,10 @@ export const TaskLabel: React.FunctionComponent<Props> = (props) => {
 
   const changeLabelColor = (e: string) => {
     setLabelColor(e);
-  }
+  };
   return (
     <>
-      <Tooltip title='Label It!'>
-        {LabelButton}
-      </Tooltip>
+      <Tooltip title='Label It!'>{LabelButton}</Tooltip>
       <Popover
         anchorReference='anchorPosition'
         anchorPosition={{ top: 105, left: 50 }}
@@ -43,8 +41,14 @@ export const TaskLabel: React.FunctionComponent<Props> = (props) => {
         }}
         onClose={() => setPopover(!popover)}
         open={popover}
-      ><div style={{display: 'flex', flexDirection: 'column'}}>
-        <Labels setColor={changeLabelColor} togglePopover={() => setPopover(!popover)} updateTaskLabel={props.onChangeTaskLabel} index={props.index}/>
+      >
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <Labels
+            setColor={changeLabelColor}
+            togglePopover={() => setPopover(!popover)}
+            onChangeTaskLabel={props.onChangeTaskLabel}
+            index={props.index}
+          />
         </div>
       </Popover>
     </>

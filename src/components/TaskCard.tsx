@@ -27,7 +27,6 @@ export class TodoCard extends React.Component<Props, State> {
     filter.splice(i, 0, { display: 'block', color: 'gray' });
     items.splice(i, 0, '');
     this.setState({ items, filter });
-    console.log(this.state.items, this.state.filter);
     this.props.onTaskAdd(items.length);
   }
 
@@ -57,21 +56,31 @@ export class TodoCard extends React.Component<Props, State> {
     this.props.onTaskAdd(items.length);
   }
 
+  unsetFilter = () => {
+    let { filter } = this.state;
+    filter.map((e, i) => {
+      if (e.display === 'none') {
+        filter[i].display = 'block';
+      }
+    });
+    this.setState({ filter });
+  }
   filterFunction = (color: string) => {
     let { filter } = this.state;
+    this.unsetFilter();
     filter.map((e, ind) => {
       if (e.color !== color) {
-        filter[ind] = { display: 'none', color: color };
+        filter[ind].display = 'none';
       }
-      this.setState({ filter });
     });
-
+    this.setState({ filter });
   }
 
   onChangeTaskLabel = (ind: number, color: string) => {
     let { filter } = this.state;
     filter[ind] = { display: 'block', color: color };
     this.setState({ filter });
+    console.log(ind, color, this.state.filter);
   }
 
   render() {
@@ -132,7 +141,10 @@ export class TodoCard extends React.Component<Props, State> {
           ))}
         </Container>
       </div>,
-      <LabelsCollapse filterCard={this.filterFunction} />
+      <LabelsCollapse
+        filterCard={this.filterFunction}
+        unsetFilter={this.unsetFilter}
+      />
     ];
   }
 }
