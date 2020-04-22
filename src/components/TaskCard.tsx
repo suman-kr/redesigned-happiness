@@ -26,8 +26,8 @@ export class TodoCard extends React.Component<Props, State> {
     let { filter } = this.state;
     filter.splice(i, 0, { display: 'block', color: 'gray' });
     items.splice(i, 0, '');
-    this.setState({ items , filter});
-    console.log(this.state.items, this.state.filter)
+    this.setState({ items, filter });
+    console.log(this.state.items, this.state.filter);
     this.props.onTaskAdd(items.length);
   }
 
@@ -41,9 +41,9 @@ export class TodoCard extends React.Component<Props, State> {
     let { items } = this.state;
     let { filter } = this.state;
     const retainOneTask = (i: number) => {
-      items.splice(0, items.length - 1)
+      items.splice(0, items.length - 1);
       items[i] = '';
-      filter.splice(0, filter.length - 1)
+      filter.splice(0, filter.length - 1);
       filter[i] = { display: 'block', color: 'gray' };
     };
     const updateTask = (ind: number) => {
@@ -62,15 +62,16 @@ export class TodoCard extends React.Component<Props, State> {
     filter.map((e, ind) => {
       if (e.color !== color) {
         filter[ind] = { display: 'none', color: color };
-        this.setState({filter});
       }
+      this.setState({ filter });
     });
+
   }
 
   onChangeTaskLabel = (ind: number, color: string) => {
-    let {filter} = this.state;
-    filter[ind] = {display: 'block', color: color};
-    this.setState({filter});
+    let { filter } = this.state;
+    filter[ind] = { display: 'block', color: color };
+    this.setState({ filter });
   }
 
   render() {
@@ -102,7 +103,10 @@ export class TodoCard extends React.Component<Props, State> {
                 display: this.state.filter[ind].display
               }}
             >
-              <TaskLabel index={ind} onChangeTaskLabel={ this.onChangeTaskLabel}/>
+              <TaskLabel
+                index={ind}
+                onChangeTaskLabel={this.onChangeTaskLabel}
+              />
               <CardContent key={ind} style={{ marginTop: '-20px' }}>
                 <IconButton
                   style={{ marginRight: '5px', color: 'firebrick' }}
@@ -128,7 +132,7 @@ export class TodoCard extends React.Component<Props, State> {
           ))}
         </Container>
       </div>,
-      <LabelsCollapse filterCard={this.filterFunction}/>
+      <LabelsCollapse filterCard={this.filterFunction} />
     ];
   }
 }
