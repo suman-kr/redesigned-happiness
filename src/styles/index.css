@@ -19,3 +19,25 @@ a {
     scrollbar-width: none;
 }
 
+.task-card {
+  min-width: 209px;
+  max-width: 349px;
+}
+
+@media screen and (min-width: 1400px){
+  .task-card{
+    width: 309px;
+  }
+}
+
+@media screen and (min-width: 2000px){
+  .task-card{
+    width: 349px;
+  }
+}
+
+@media screen and (max-width: 1400px){
+  .task-card{
+    width: 209px;
+  }
+}

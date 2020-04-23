@@ -96,10 +96,7 @@ export class TodoCard extends React.Component<Props, State> {
       >
         <Container
           style={{
-            display: 'flex',
-            justifyContent: 'start',
-            alignItems: 'center',
-            flexDirection: 'column',
+            display: 'grid'
           }}
         >
           {this.state.items.map((value, ind) => (
@@ -129,6 +126,7 @@ export class TodoCard extends React.Component<Props, State> {
                   value={value}
                   onChange={(e) => this.onChange(e, ind)}
                   multiline
+                  className='task-card'
                 />
                 <IconButton
                   onClick={() => this.newElement(ind + 1)}
