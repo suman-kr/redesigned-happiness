@@ -30,7 +30,7 @@ export const TaskLabel: React.FunctionComponent<Props> = (props) => {
       <Tooltip title='Label It!'>{LabelButton}</Tooltip>
       <Popover
         anchorReference='anchorPosition'
-        anchorPosition={{ top: 105, left: 50 }}
+        anchorPosition={{ top: 105*props.index, left: 50 }}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'left',
