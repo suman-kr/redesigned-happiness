@@ -25,7 +25,10 @@
 			"es2016.array.include",
 			"es2017.object",
 			"dom"
-		],
+    ],
+    "include":[ 
+      "src/**/*"
+    ],
 		"module": "es6",
 		"removeComments": true,
 		"alwaysStrict": true,

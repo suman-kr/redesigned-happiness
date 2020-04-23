@@ -11,6 +11,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import '../styles/index.css';
 import { LabelsCollapse } from './LabelsCollapse';
 import { TaskLabel } from './TaskLabel';
+import 'animate.css';
+import {useToasts} from 'react-toast-notifications';
 
 export class TodoCard extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -90,7 +92,7 @@ export class TodoCard extends React.Component<Props, State> {
           height: '88vh',
           overflow: 'auto',
           float: 'left',
-          minWidth: '390px',
+          minWidth: '390px'
         }}
       >
         <Container
