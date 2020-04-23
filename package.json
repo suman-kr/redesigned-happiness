@@ -11,7 +11,7 @@
     "check-types": "tsc"
   },
   "keywords": [],
-  "author": "",
+  "author": "suman-kr",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -28,16 +28,17 @@
     "tslint-immutable": "^6.0.1",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3",
-    "@types/notify": "0.0.29",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.6",
-    "@types/react-router-dom": "^5.1.4",
-    "@types/react-toast-notifications": "^2.4.0"
+    "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.9.1",
+    "@types/notify": "0.0.29",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "@types/react-router-dom": "^5.1.4",
+    "@types/react-toast-notifications": "^2.4.0",
+    "@types/react-calendar": "^3.0.1",
     "animate.css": "^3.7.2",
     "babel-loader": "^8.1.0",
     "lowdb": "^1.0.0",

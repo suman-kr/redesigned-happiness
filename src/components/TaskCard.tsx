@@ -12,7 +12,7 @@ import '../styles/index.css';
 import { LabelsCollapse } from './LabelsCollapse';
 import { TaskLabel } from './TaskLabel';
 import 'animate.css';
-import {useToasts} from 'react-toast-notifications';
+import Calendar from 'react-calendar';
 
 export class TodoCard extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -145,7 +145,8 @@ export class TodoCard extends React.Component<Props, State> {
       <LabelsCollapse
         filterCard={this.filterFunction}
         unsetFilter={this.unsetFilter}
-      />
+      />,
+      <Calendar />
     ];
   }
 }
