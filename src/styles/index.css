@@ -1,6 +1,9 @@
 body {
   height: 97vh;
-  background: linear-gradient(to right, #1d2b64, #f8cdda);
+   background-image: url(../assets/task.jpg);
+   background-attachment: fixed;
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 
 .card {
