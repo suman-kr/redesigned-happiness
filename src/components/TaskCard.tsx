@@ -80,7 +80,6 @@ export class TodoCard extends React.Component<Props, State> {
     let { filter } = this.state;
     filter[ind] = { display: 'block', color: color };
     this.setState({ filter });
-    console.log(ind, color, this.state.filter);
   }
 
   render() {
@@ -112,6 +111,7 @@ export class TodoCard extends React.Component<Props, State> {
               <TaskLabel
                 index={ind}
                 onChangeTaskLabel={this.onChangeTaskLabel}
+                color={this.state.filter[ind].color}
               />
               <CardContent key={ind} style={{ marginTop: '-20px' }}>
                 <IconButton

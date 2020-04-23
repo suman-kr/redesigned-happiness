@@ -4,7 +4,6 @@ import { Labels } from './Labels';
 
 export const TaskLabel: React.FunctionComponent<Props> = (props) => {
   const [popover, setPopover] = React.useState<boolean>(false);
-  const [labelColor, setLabelColor] = React.useState<string>('gray');
   const LabelButton = (
     <div
       className={`label-${props.index}`}
@@ -12,7 +11,7 @@ export const TaskLabel: React.FunctionComponent<Props> = (props) => {
         height: '20px',
         width: '20px',
         position: 'relative',
-        background: labelColor,
+        background: props.color,
         borderRadius: '50%',
         cursor: 'pointer',
         boxShadow: '4px 1px 8px grey',
@@ -22,15 +21,12 @@ export const TaskLabel: React.FunctionComponent<Props> = (props) => {
     ></div>
   );
 
-  const changeLabelColor = (e: string) => {
-    setLabelColor(e);
-  };
   return (
     <>
       <Tooltip title='Label It!'>{LabelButton}</Tooltip>
       <Popover
         anchorReference='anchorPosition'
-        anchorPosition={{ top: 105*props.index, left: 50 }}
+        anchorPosition={{ top: 90 * (props.index + 1), left: 50 }}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'left',
@@ -44,7 +40,6 @@ export const TaskLabel: React.FunctionComponent<Props> = (props) => {
       >
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <Labels
-            setColor={changeLabelColor}
             togglePopover={() => setPopover(!popover)}
             onChangeTaskLabel={props.onChangeTaskLabel}
             index={props.index}
@@ -59,4 +54,5 @@ export const TaskLabel: React.FunctionComponent<Props> = (props) => {
 interface Props {
   index: number;
   onChangeTaskLabel: (e: number, v: string) => void;
+  color: string;
 }
