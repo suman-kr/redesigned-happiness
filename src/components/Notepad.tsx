@@ -19,12 +19,12 @@ export class Notepad extends React.PureComponent<{}, State> {
     fontSize: false,
     selectedColor: COLOR.DEFAULT,
     notesText: '',
-    multiLines: 4,
+    multiLines: 6,
   };
 
   componentDidMount(){
     if (window.screen.width >= 1400){
-      this.setState({multiLines: 8});
+      this.setState({multiLines: 10});
     }
   }
 
@@ -117,7 +117,7 @@ export class Notepad extends React.PureComponent<{}, State> {
           toggleSize={this.toggleSize}
           changeColor={this.changeColor}
         />
-        <Card style={{ borderRadius: '0px' }}>
+        <Card style={{ borderRadius: '0px' }} elevation={10}>
           <CardContent>
             <TextField
               multiline

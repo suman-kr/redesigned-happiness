@@ -107,6 +107,7 @@ export class TodoCard extends React.Component<Props, State> {
                 borderRadius: '0px',
                 display: this.state.filter[ind].display
               }}
+              elevation={10}
             >
               <TaskLabel
                 index={ind}
