@@ -55,7 +55,7 @@ export class Labels extends React.PureComponent<Props, State> {
             if (this.props.unsetFilter) this.props.unsetFilter();
           }}
         >
-          Remove Filter
+          Show All
         </Button>
         }
       </>
