@@ -19,7 +19,15 @@ export class Notepad extends React.PureComponent<{}, State> {
     fontSize: false,
     selectedColor: COLOR.DEFAULT,
     notesText: '',
+    multiLines: 4,
   };
+
+  componentDidMount(){
+    if (window.screen.width >= 1400){
+      this.setState({multiLines: 8});
+    }
+  }
+
   countChars = (e: string) => {
     this.setState({ countChars: e.length });
   }
@@ -101,7 +109,7 @@ export class Notepad extends React.PureComponent<{}, State> {
 
   render() {
     return (
-      <Container>
+      <Container className='notepad'>
         <FormatOptions
           changeFont={this.changeFont}
           toggleBold={this.toggleBold}
@@ -114,7 +122,7 @@ export class Notepad extends React.PureComponent<{}, State> {
             <TextField
               multiline
               label='Start Writing'
-              rows={4}
+              rows={this.state.multiLines}
               fullWidth
               onChange={(e) => {
                 this.countChars(e.target.value);
@@ -170,4 +178,5 @@ interface State {
   fontSize: boolean;
   selectedColor: COLOR;
   notesText: string;
+  multiLines: number;
 }

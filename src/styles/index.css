@@ -15,8 +15,8 @@ a {
   display: none;
 }
 
-#scroll{
-    scrollbar-width: none;
+#scroll {
+  scrollbar-width: none;
 }
 
 .task-card {
@@ -24,20 +24,26 @@ a {
   max-width: 349px;
 }
 
-@media screen and (min-width: 1400px){
-  .task-card{
+@media screen and (min-width: 1400px) {
+  .task-card {
     width: 309px;
   }
 }
 
-@media screen and (min-width: 2000px){
-  .task-card{
+@media screen and (min-width: 2000px) {
+  .task-card {
     width: 349px;
   }
 }
 
-@media screen and (max-width: 1400px){
-  .task-card{
+@media screen and (max-width: 1400px) {
+  .task-card {
     width: 209px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .notepad {
+    max-width: 100% !important;
   }
 }
