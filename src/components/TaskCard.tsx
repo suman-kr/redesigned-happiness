@@ -4,7 +4,8 @@ import {
   Card,
   CardContent,
   TextField,
-  IconButton
+  IconButton,
+  Snackbar
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -12,16 +13,20 @@ import '../styles/index.css';
 import { LabelsCollapse } from './LabelsCollapse';
 import { TaskLabel } from './TaskLabel';
 import 'animate.css';
-import {useToasts} from 'react-toast-notifications';
+import { Alerts } from './Alerts';
 
 export class TodoCard extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
       items: [''],
-      filter: [{ display: 'block', color: 'gray' }]
+      filter: [{ display: 'block', color: 'gray' }],
+      toggleAlert: false,
+      type: 'success',
+      alertMessage: '',
     };
   }
+
 
   newElement = (i: number) => {
     let { items } = this.state;
@@ -32,11 +37,27 @@ export class TodoCard extends React.Component<Props, State> {
     this.props.onTaskAdd(items.length);
   }
 
+  toggleAlert = () => {
+    this.setState({ toggleAlert: !this.state.toggleAlert });
+  }
+
   onChange = (e: any, ind: number) => {
     const { items } = this.state;
     items[ind] = e.target.value;
     this.setState({ items });
   }
+
+  alertify = () => (
+    <Snackbar
+      open={this.state.toggleAlert}
+      autoHideDuration={2000}
+      onClose={this.toggleAlert}
+    >
+      <Alerts onClose={this.toggleAlert} severity={this.state.type}>
+        {this.state.alertMessage}
+      </Alerts>
+    </Snackbar>
+  )
 
   removeElement = (ind: number) => {
     let { items } = this.state;
@@ -92,12 +113,12 @@ export class TodoCard extends React.Component<Props, State> {
           height: '88vh',
           overflow: 'auto',
           float: 'left',
-          minWidth: '390px'
+          minWidth: '390px',
         }}
       >
         <Container
           style={{
-            display: 'grid'
+            display: 'grid',
           }}
         >
           {this.state.items.map((value, ind) => (
@@ -119,7 +140,21 @@ export class TodoCard extends React.Component<Props, State> {
               <CardContent key={ind} style={{ marginTop: '-20px' }}>
                 <IconButton
                   style={{ marginRight: '5px', color: 'firebrick' }}
-                  onClick={(e) => this.removeElement(ind)}
+                  onClick={(e) => {
+                    {
+                      this.state.items.length === 1
+                        ? this.setState({
+                            type: 'info',
+                            alertMessage: `Can't be deleted!`
+                          })
+                        : this.setState({
+                            type: 'error',
+                            alertMessage: 'Task deleted',
+                          });
+                    }
+                    this.removeElement(ind);
+                    this.toggleAlert();
+                  }}
                 >
                   <CloseIcon />
                 </IconButton>
@@ -132,7 +167,14 @@ export class TodoCard extends React.Component<Props, State> {
                   className='task-card'
                 />
                 <IconButton
-                  onClick={() => this.newElement(ind + 1)}
+                  onClick={() => {
+                    this.newElement(ind + 1);
+                    this.setState({
+                      type: 'success',
+                      alertMessage: 'Task Added',
+                    });
+                    this.toggleAlert();
+                  }}
                   style={{ color: 'blue', float: 'right' }}
                 >
                   <AddIcon />
@@ -145,7 +187,8 @@ export class TodoCard extends React.Component<Props, State> {
       <LabelsCollapse
         filterCard={this.filterFunction}
         unsetFilter={this.unsetFilter}
-      />
+      />,
+      this.alertify()
     ];
   }
 }
@@ -153,6 +196,9 @@ export class TodoCard extends React.Component<Props, State> {
 interface State {
   items: string[];
   filter: [{ display: string; color: string }];
+  toggleAlert: boolean;
+  type: 'success' | 'error' | 'warning' | 'info';
+  alertMessage: string;
 }
 
 interface Props {
