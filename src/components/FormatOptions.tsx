@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { Popover, Button, Card, Tooltip } from '@material-ui/core';
+import {
+  Popover,
+  Button,
+  Card,
+  Tooltip,
+  Dialog,
+  DialogTitle,
+  Typography,
+  TextField
+} from '@material-ui/core';
 import GoogleFontLoader from 'react-google-font-loader';
 import '../styles/index.css';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
@@ -9,7 +18,7 @@ export enum FONT {
   SOURCE_SANS = 'Source Sans Pro, sans-serif',
   DANCING_SCRIPT = 'Dancing Script, cursive',
   SHADOW = 'Shadows Into Light, cursive',
-  DEFAULT = 'Roboto, Helvetica, Arial, sans-serif'
+  DEFAULT = 'Roboto, Helvetica, Arial, sans-serif',
 }
 
 export enum COLOR {
@@ -17,7 +26,7 @@ export enum COLOR {
   BROWN = '#a52a2a',
   BLUE = '#0000ff',
   DEFAULT = 'rgba(0, 0, 0, 0.87)',
-  CRIMSON = '#ed143d'
+  CRIMSON = '#ed143d',
 }
 
 export class FormatOptions extends React.PureComponent<Props, State> {
@@ -25,12 +34,68 @@ export class FormatOptions extends React.PureComponent<Props, State> {
     selectedFont: FONT.ROBOTO,
     toggleFontPopover: false,
     toggleColorPopover: false,
-    selectedColor: COLOR.DEFAULT
+    selectedColor: COLOR.DEFAULT,
+    toggleDialog: false,
+    linkName: '',
+    linkURL: '',
   };
   togglePopover = (i: number) => {
     i === 1
       ? this.setState({ toggleFontPopover: !this.state.toggleFontPopover })
       : this.setState({ toggleColorPopover: !this.state.toggleColorPopover });
+  }
+
+  createLink = () => {
+    const anchorTag = document.createElement('a');
+    anchorTag.setAttribute('href', this.state.linkURL);
+    const textNode = document.createTextNode(this.state.linkName);
+    anchorTag.appendChild(textNode);
+    const notepadId = document.getElementById('notepad-text');
+  }
+  insertLinkDialog = () => (
+    <Dialog
+      onClose={this.toggleDialog}
+      open={this.state.toggleDialog}
+      className={'dialog'}
+    >
+      <DialogTitle
+        style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}
+      >
+        Insert Link
+      </DialogTitle>
+      <TextField
+        style={{ width: '80px', padding: '10px' }}
+        placeholder={'Name:'}
+        onChange={(e) => {
+          this.setState({ linkName: e.target.value });
+        }}
+      ></TextField>
+      <TextField
+        style={{ padding: '10px' }}
+        placeholder={'https://www.example.com'}
+        onChange={(e) => {
+          this.setState({ linkURL: e.target.value });
+        }}
+      ></TextField>
+      <Button
+        style={{
+          textTransform: 'capitalize',
+          borderRadius: '0px',
+          display: 'block',
+          margin: 'auto',
+          marginBottom: '6px',
+        }}
+        variant='contained'
+        color='primary'
+        onClick={this.toggleDialog}
+      >
+        Insert
+      </Button>
+    </Dialog>
+  )
+
+  toggleDialog = () => {
+    this.setState({ toggleDialog: !this.state.toggleDialog });
   }
 
   render() {
@@ -78,11 +143,11 @@ export class FormatOptions extends React.PureComponent<Props, State> {
           anchorPosition={{ top: 105, left: 50 }}
           anchorOrigin={{
             vertical: 'top',
-            horizontal: 'left'
+            horizontal: 'left',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'left'
+            horizontal: 'left',
           }}
           onClose={() => this.togglePopover(1)}
           open={this.state.toggleFontPopover}
@@ -91,7 +156,7 @@ export class FormatOptions extends React.PureComponent<Props, State> {
             <Button
               style={{
                 background: 'whitesmoke',
-                borderRadius: '0px'
+                borderRadius: '0px',
               }}
               variant='contained'
               onClick={() => {
@@ -107,7 +172,7 @@ export class FormatOptions extends React.PureComponent<Props, State> {
               style={{
                 fontFamily: 'Source Sans Pro, sans-serif',
                 background: 'whitesmoke',
-                borderRadius: '0px'
+                borderRadius: '0px',
               }}
               variant='contained'
               onClick={() => {
@@ -123,7 +188,7 @@ export class FormatOptions extends React.PureComponent<Props, State> {
               style={{
                 fontFamily: 'Dancing Script, cursive',
                 background: 'whitesmoke',
-                borderRadius: '0px'
+                borderRadius: '0px',
               }}
               variant='contained'
               onClick={() => {
@@ -139,7 +204,7 @@ export class FormatOptions extends React.PureComponent<Props, State> {
               style={{
                 fontFamily: 'Shadows Into Light, cursive',
                 background: 'whitesmoke',
-                borderRadius: '0px'
+                borderRadius: '0px',
               }}
               variant='contained'
               onClick={() => {
@@ -159,7 +224,11 @@ export class FormatOptions extends React.PureComponent<Props, State> {
             onClick={() => {
               this.togglePopover(2);
             }}
-            style={{ borderRadius: '0px', background: this.state.selectedColor, color: 'white'}}
+            style={{
+              borderRadius: '0px',
+              background: this.state.selectedColor,
+              color: 'white',
+            }}
           >
             Color
           </Button>
@@ -169,13 +238,15 @@ export class FormatOptions extends React.PureComponent<Props, State> {
           anchorPosition={{ top: 105, left: 140 }}
           anchorOrigin={{
             vertical: 'top',
-            horizontal: 'center'
+            horizontal: 'center',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'left'
+            horizontal: 'left',
           }}
-          onClose={() => {this.togglePopover(2);}}
+          onClose={() => {
+            this.togglePopover(2);
+          }}
           open={this.state.toggleColorPopover}
         >
           <Card style={{ display: 'flex', flexDirection: 'column' }}>
@@ -183,7 +254,7 @@ export class FormatOptions extends React.PureComponent<Props, State> {
               style={{
                 background: COLOR.DEFAULT,
                 borderRadius: '0px',
-                color: 'white'
+                color: 'white',
               }}
               variant='contained'
               onClick={() => {
@@ -191,12 +262,14 @@ export class FormatOptions extends React.PureComponent<Props, State> {
                 this.props.changeColor(5);
                 this.setState({ selectedColor: COLOR.DEFAULT });
               }}
-            >Black</Button>
+            >
+              Black
+            </Button>
             <Button
               style={{
                 background: COLOR.BLUE,
                 borderRadius: '0px',
-                color: 'white'
+                color: 'white',
               }}
               variant='contained'
               onClick={() => {
@@ -204,12 +277,14 @@ export class FormatOptions extends React.PureComponent<Props, State> {
                 this.props.changeColor(1);
                 this.setState({ selectedColor: COLOR.BLUE });
               }}
-            >Blue</Button>
+            >
+              Blue
+            </Button>
             <Button
               style={{
                 background: COLOR.CRIMSON,
                 borderRadius: '0px',
-                color: 'white'
+                color: 'white',
               }}
               variant='contained'
               onClick={() => {
@@ -217,12 +292,14 @@ export class FormatOptions extends React.PureComponent<Props, State> {
                 this.props.changeColor(4);
                 this.setState({ selectedColor: COLOR.CRIMSON });
               }}
-            >Crimson</Button>
+            >
+              Crimson
+            </Button>
             <Button
               style={{
                 background: COLOR.BROWN,
                 borderRadius: '0px',
-                color: 'white'
+                color: 'white',
               }}
               variant='contained'
               onClick={() => {
@@ -230,12 +307,14 @@ export class FormatOptions extends React.PureComponent<Props, State> {
                 this.props.changeColor(2);
                 this.setState({ selectedColor: COLOR.BROWN });
               }}
-            >Brown</Button>
+            >
+              Brown
+            </Button>
             <Button
               style={{
                 background: COLOR.GREEN,
                 borderRadius: '0px',
-                color: 'white'
+                color: 'white',
               }}
               variant='contained'
               onClick={() => {
@@ -243,7 +322,9 @@ export class FormatOptions extends React.PureComponent<Props, State> {
                 this.props.changeColor(3);
                 this.setState({ selectedColor: COLOR.GREEN });
               }}
-            >Green</Button>
+            >
+              Green
+            </Button>
           </Card>
         </Popover>
         <Tooltip title='Make it Bold!'>
@@ -281,6 +362,21 @@ export class FormatOptions extends React.PureComponent<Props, State> {
             startIcon={<ImportExportIcon />}
           />
         </Tooltip>
+        <Tooltip title='Insert Link'>
+          <Button
+            variant='contained'
+            className='card'
+            onClick={this.toggleDialog}
+            style={{
+              borderRadius: '0px',
+              background: 'white',
+              textTransform: 'capitalize',
+            }}
+          >
+            Link
+          </Button>
+        </Tooltip>
+        {this.insertLinkDialog()}
       </>
     );
   }
@@ -291,6 +387,9 @@ interface State {
   selectedFont: FONT;
   toggleColorPopover: boolean;
   selectedColor: COLOR;
+  toggleDialog: boolean;
+  linkName: string;
+  linkURL: string;
 }
 
 interface Props {

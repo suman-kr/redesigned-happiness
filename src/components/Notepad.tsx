@@ -130,6 +130,7 @@ export class Notepad extends React.PureComponent<{}, State> {
                 this.onChange(e.target.value);
               }}
               value={this.state.notesText}
+              id='notepad-text'
               inputProps={{
                 style: {
                   fontFamily: this.state.selectedFont,

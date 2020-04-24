@@ -50,3 +50,7 @@ a {
     max-width: 100% !important;
   }
 }
+
+.MuiDialog-paperScrollPaper{
+  display: block !important;
+}
