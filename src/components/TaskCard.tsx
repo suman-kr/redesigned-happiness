@@ -54,7 +54,6 @@ export class TodoCard extends React.Component<Props, State> {
     const { taskDates } = this.state;
     taskDates[i] = e;
     this.setState({ taskDates });
-    console.log(this.state.taskDates);
   }
 
   alertify = () => (
