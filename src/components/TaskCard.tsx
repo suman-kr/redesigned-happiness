@@ -5,7 +5,8 @@ import {
   CardContent,
   TextField,
   IconButton,
-  Snackbar
+  Snackbar,
+  Tooltip
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -16,6 +17,7 @@ import 'animate.css';
 import { Alerts } from './Alerts';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { DatePicker } from './DatePicker';
 
 export class TodoCard extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -28,7 +30,6 @@ export class TodoCard extends React.Component<Props, State> {
       alertMessage: '',
     };
   }
-
 
   newElement = (i: number) => {
     let { items } = this.state;
@@ -182,6 +183,7 @@ export class TodoCard extends React.Component<Props, State> {
                   <AddIcon />
                 </IconButton>
               </CardContent>
+              <DatePicker />
             </Card>
           ))}
         </Container>
@@ -191,8 +193,7 @@ export class TodoCard extends React.Component<Props, State> {
         unsetFilter={this.unsetFilter}
       />,
       <Calendar />,
-      this.alertify(),
-      
+      this.alertify()
     ];
   }
 }
