@@ -15,9 +15,8 @@ import { LabelsCollapse } from './LabelsCollapse';
 import { TaskLabel } from './TaskLabel';
 import 'animate.css';
 import { Alerts } from './Alerts';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { DatePicker } from './DatePicker';
+import { TaskCalendar } from './TaskCalendar';
 
 export class TodoCard extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -28,6 +27,7 @@ export class TodoCard extends React.Component<Props, State> {
       toggleAlert: false,
       type: 'success',
       alertMessage: '',
+      taskDates: ['']
     };
   }
 
@@ -48,6 +48,13 @@ export class TodoCard extends React.Component<Props, State> {
     const { items } = this.state;
     items[ind] = e.target.value;
     this.setState({ items });
+  }
+
+  addTaskDate = (i: number, e: string) => {
+    const { taskDates } = this.state;
+    taskDates[i] = e;
+    this.setState({ taskDates });
+    console.log(this.state.taskDates);
   }
 
   alertify = () => (
@@ -183,7 +190,14 @@ export class TodoCard extends React.Component<Props, State> {
                   <AddIcon />
                 </IconButton>
               </CardContent>
-              <DatePicker />
+              <Tooltip title='Select Date'>
+                <div style={{ marginTop: '-24px', cursor: 'pointer' }}>
+                  <TextField
+                    type='date'
+                    onChange={(e) => this.addTaskDate(ind, e.target.value)}
+                  />
+                </div>
+              </Tooltip>
             </Card>
           ))}
         </Container>
@@ -192,7 +206,7 @@ export class TodoCard extends React.Component<Props, State> {
         filterCard={this.filterFunction}
         unsetFilter={this.unsetFilter}
       />,
-      <Calendar />,
+      <TaskCalendar taskDates={this.state.taskDates} />,
       this.alertify()
     ];
   }
@@ -204,6 +218,7 @@ interface State {
   toggleAlert: boolean;
   type: 'success' | 'error' | 'warning' | 'info';
   alertMessage: string;
+  taskDates: string[];
 }
 
 interface Props {
