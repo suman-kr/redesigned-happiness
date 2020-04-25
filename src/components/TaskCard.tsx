@@ -14,6 +14,8 @@ import { LabelsCollapse } from './LabelsCollapse';
 import { TaskLabel } from './TaskLabel';
 import 'animate.css';
 import { Alerts } from './Alerts';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 export class TodoCard extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -188,7 +190,9 @@ export class TodoCard extends React.Component<Props, State> {
         filterCard={this.filterFunction}
         unsetFilter={this.unsetFilter}
       />,
-      this.alertify()
+      <Calendar />,
+      this.alertify(),
+      
     ];
   }
 }
