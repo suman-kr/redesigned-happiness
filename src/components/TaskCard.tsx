@@ -5,8 +5,13 @@ import {
   CardContent,
   TextField,
   IconButton,
-  Snackbar
+  Snackbar,
+  Grid
 } from '@material-ui/core';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers'
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import '../styles/index.css';
@@ -16,6 +21,7 @@ import 'animate.css';
 import { Alerts } from './Alerts';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import DateFnsUtils from '@date-io/date-fns';
 
 export class TodoCard extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -146,13 +152,13 @@ export class TodoCard extends React.Component<Props, State> {
                     {
                       this.state.items.length === 1
                         ? this.setState({
-                            type: 'info',
-                            alertMessage: `Can't be deleted!`
-                          })
+                          type: 'info',
+                          alertMessage: `Can't be deleted!`
+                        })
                         : this.setState({
-                            type: 'error',
-                            alertMessage: 'Task deleted',
-                          });
+                          type: 'error',
+                          alertMessage: 'Task deleted',
+                        });
                     }
                     this.removeElement(ind);
                     this.toggleAlert();
@@ -180,6 +186,23 @@ export class TodoCard extends React.Component<Props, State> {
                   style={{ color: 'blue', float: 'right' }}
                 >
                   <AddIcon />
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid container justify='space-around'>
+                      <KeyboardDatePicker
+                        variant='inline'
+                        format='MM/dd/yyyy'
+                        margin='normal'
+                        id='date-picker-inline'
+                        label='Date picker inline'
+                        value={new Date('2020-04-22')}
+                        onChange={(e) => console.log(e)
+                        }
+                        KeyboardButtonProps={{
+                          'aria-label': 'change date',
+                        }}
+                      />
+                    </Grid>
+                  </MuiPickersUtilsProvider>
                 </IconButton>
               </CardContent>
             </Card>
@@ -192,7 +215,7 @@ export class TodoCard extends React.Component<Props, State> {
       />,
       <Calendar />,
       this.alertify(),
-      
+
     ];
   }
 }
