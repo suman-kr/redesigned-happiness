@@ -55,5 +55,5 @@ a {
   display: grid !important;
   margin-top: 4em !important;
   max-width: 50em !important;
-  width: auto;
+  width: auto !important;
 }
