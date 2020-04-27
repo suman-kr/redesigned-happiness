@@ -1,14 +1,23 @@
 import * as React from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
-import { Snackbar } from '@material-ui/core';
+import {
+  Snackbar,
+  Dialog,
+  DialogTitle,
+  TextField,
+  Button,
+  Typography
+} from '@material-ui/core';
 import { Alerts } from './Alerts';
 import '../styles/index.css';
-import {Date} from './TaskCard';
+import { Date } from './TaskCard';
 export class TaskCalendar extends React.PureComponent<Props, State> {
   state = {
     toggleAlert: false,
-    assignedTask: 0
+    assignedTask: 0,
+    toggleDialog: false,
+    selectedDate: '',
   };
 
   toggleAlert = () => {
@@ -32,7 +41,43 @@ export class TaskCalendar extends React.PureComponent<Props, State> {
       assignedTask: this.props.taskDates.filter((e) => e === date).length
     });
   }
-
+  toggleDialog = () => {
+    this.setState({ toggleDialog: !this.state.toggleDialog });
+  }
+  showTaskDialog = () => (
+    <Dialog
+      onClose={this.toggleDialog}
+      open={this.state.toggleDialog}
+      className={'dialog'}
+    >
+      <DialogTitle
+        style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}
+      >
+        Tasks
+      </DialogTitle>
+      {this.props.mapDates[this.state.selectedDate] ? (
+        this.props.mapDates[this.state.selectedDate].map((e) => (
+          <Typography>{e}</Typography>
+        ))
+      ) : (
+        <Typography variant='h2'>No tasks</Typography>
+      )}
+      <Button
+        style={{
+          textTransform: 'capitalize',
+          borderRadius: '0px',
+          display: 'block',
+          margin: 'auto',
+          marginBottom: '6px',
+        }}
+        variant='contained'
+        color='primary'
+        onClick={this.toggleDialog}
+      >
+        Close
+      </Button>
+    </Dialog>
+  )
   // shouldDateBeSelected = (a: Date) => {
   //   if(this.state.mapDates.includes(a)){
   //     console.log('include', a)
@@ -46,6 +91,10 @@ export class TaskCalendar extends React.PureComponent<Props, State> {
         onClickDay={(e) => {
           this.showAllDates(moment(e).format('YYYY-MM-DD'));
           this.toggleAlert();
+          this.setState({ selectedDate: moment(e).format('YYYY-MM-DD') });
+          this.toggleDialog();
+
+          // this.showTaskDialog(e);
         }}
         // {this.props.mapDates?.map(e => {
         //   // tileC
@@ -60,7 +109,8 @@ export class TaskCalendar extends React.PureComponent<Props, State> {
         //   return null;
         // }}
       />,
-      this.alertify()
+      this.alertify(),
+      this.showTaskDialog()
     ];
   }
 }
@@ -71,4 +121,6 @@ interface Props {
 interface State {
   toggleAlert: boolean;
   assignedTask: number;
+  toggleDialog: boolean;
+  selectedDate: string;
 }

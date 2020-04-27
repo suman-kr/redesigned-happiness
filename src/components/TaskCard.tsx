@@ -28,7 +28,7 @@ export class TodoCard extends React.Component<Props, State> {
       type: 'success',
       alertMessage: '',
       taskDates: [''],
-      mapDates: {}
+      mapDates: {'': []}
     };
   }
 
