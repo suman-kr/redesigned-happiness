@@ -17,7 +17,7 @@ import 'animate.css';
 import { Alerts } from './Alerts';
 import 'react-calendar/dist/Calendar.css';
 import { TaskCalendar } from './TaskCalendar';
-
+import moment from 'moment';
 export class TodoCard extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -27,7 +27,8 @@ export class TodoCard extends React.Component<Props, State> {
       toggleAlert: false,
       type: 'success',
       alertMessage: '',
-      taskDates: ['']
+      taskDates: [''],
+      mapDates: {}
     };
   }
 
@@ -54,6 +55,18 @@ export class TodoCard extends React.Component<Props, State> {
     const { taskDates } = this.state;
     taskDates[i] = e;
     this.setState({ taskDates });
+  }
+
+  mapDatesToTask = (i: number, date: string) => {
+    let { mapDates } = this.state;
+    if (date in mapDates) {
+      mapDates[date].push(i);
+      mapDates = { ...mapDates };
+      this.setState({ mapDates });
+    } else {
+      mapDates = { ...mapDates, [date]: [i] };
+      this.setState({ mapDates });
+    }
   }
 
   alertify = () => (
@@ -193,7 +206,10 @@ export class TodoCard extends React.Component<Props, State> {
                 <div style={{ marginTop: '-24px', cursor: 'pointer' }}>
                   <TextField
                     type='date'
-                    onChange={(e) => this.addTaskDate(ind, e.target.value)}
+                    onChange={(e) => {
+                      this.addTaskDate(ind, e.target.value);
+                      this.mapDatesToTask(ind, e.target.value);
+                    }}
                   />
                 </div>
               </Tooltip>
@@ -205,7 +221,7 @@ export class TodoCard extends React.Component<Props, State> {
         filterCard={this.filterFunction}
         unsetFilter={this.unsetFilter}
       />,
-      <TaskCalendar taskDates={this.state.taskDates} />,
+      <TaskCalendar taskDates={this.state.taskDates} mapDates={this.state.mapDates}/>,
       this.alertify()
     ];
   }
@@ -218,8 +234,13 @@ interface State {
   type: 'success' | 'error' | 'warning' | 'info';
   alertMessage: string;
   taskDates: string[];
+  mapDates: Date;
 }
 
 interface Props {
   onTaskAdd: (c: number) => void;
+}
+
+export interface Date {
+  [key: string]: number[];
 }
