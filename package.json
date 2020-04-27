@@ -42,6 +42,7 @@
     "animate.css": "^3.7.2",
     "babel-loader": "^8.1.0",
     "lowdb": "^1.0.0",
+    "material-table": "^1.57.2",
     "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-calendar": "^3.0.1",

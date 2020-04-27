@@ -12,6 +12,7 @@ import {
 import { Alerts } from './Alerts';
 import '../styles/index.css';
 import { Date } from './TaskCard';
+import MaterialTable from 'material-table'
 export class TaskCalendar extends React.PureComponent<Props, State> {
   state = {
     toggleAlert: false,
@@ -51,17 +52,22 @@ export class TaskCalendar extends React.PureComponent<Props, State> {
       className={'dialog'}
     >
       <DialogTitle
-        style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}
+        style={{ display: 'flex', justifyContent: 'center', padding: '10px', width: '62vh' }}
       >
         Tasks
       </DialogTitle>
       {this.props.mapDates[this.state.selectedDate] ? (
-        this.props.mapDates[this.state.selectedDate].map((e) => (
-          <Typography>{e}</Typography>
-        ))
+        <MaterialTable
+          columns={[{ title: 'Index', field: 'index' }, { title: 'content', field: 'content' }]}
+          options={{ toolbar: false, pageSize:10, paginationType: 'stepped' }}
+          title=''
+          data={this.props.mapDates[this.state.selectedDate].map((e) => (
+            { 'index': e, 'content': this.props.items[e] }
+          ))}
+        />
       ) : (
-        <Typography variant='h2'>No tasks</Typography>
-      )}
+          <Typography variant='h2'>No tasks</Typography>
+        )}
       <Button
         style={{
           textTransform: 'capitalize',
@@ -96,18 +102,18 @@ export class TaskCalendar extends React.PureComponent<Props, State> {
 
           // this.showTaskDialog(e);
         }}
-        // {this.props.mapDates?.map(e => {
-        //   // tileC
-        // })}
-        // tileClassName={this.props.mapDates}
-        // tileContent={this.props.mapDates?.map(e => e.date)}
-        // tileClassName={({ date }) => {
-        //   if (this.props.shouldDateBeSelected(date)) {
-        //     console.log('hello', date);
-        //     return 'react-calendar__tile--active';
-        //   }
-        //   return null;
-        // }}
+      // {this.props.mapDates?.map(e => {
+      //   // tileC
+      // })}
+      // tileClassName={this.props.mapDates}
+      // tileContent={this.props.mapDates?.map(e => e.date)}
+      // tileClassName={({ date }) => {
+      //   if (this.props.shouldDateBeSelected(date)) {
+      //     console.log('hello', date);
+      //     return 'react-calendar__tile--active';
+      //   }
+      //   return null;
+      // }}
       />,
       this.alertify(),
       this.showTaskDialog()
@@ -117,6 +123,7 @@ export class TaskCalendar extends React.PureComponent<Props, State> {
 interface Props {
   taskDates: string[];
   mapDates: Date;
+  items: string[]
 }
 interface State {
   toggleAlert: boolean;

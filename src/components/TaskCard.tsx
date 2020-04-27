@@ -62,11 +62,10 @@ export class TodoCard extends React.Component<Props, State> {
     if (date in mapDates) {
       mapDates[date].push(i);
       mapDates = { ...mapDates };
-      this.setState({ mapDates });
     } else {
       mapDates = { ...mapDates, [date]: [i] };
-      this.setState({ mapDates });
     }
+    this.setState({ mapDates });
   }
 
   alertify = () => (
@@ -221,7 +220,7 @@ export class TodoCard extends React.Component<Props, State> {
         filterCard={this.filterFunction}
         unsetFilter={this.unsetFilter}
       />,
-      <TaskCalendar taskDates={this.state.taskDates} mapDates={this.state.mapDates}/>,
+      <TaskCalendar taskDates={this.state.taskDates} mapDates={this.state.mapDates} items={this.state.items}/>,
       this.alertify()
     ];
   }
