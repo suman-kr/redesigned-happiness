@@ -58,11 +58,11 @@ export class TaskCalendar extends React.PureComponent<Props, State> {
       </DialogTitle>
       {this.props.mapDates[this.state.selectedDate] ? (
         <MaterialTable
-          columns={[{ title: 'Index', field: 'index' }, { title: 'content', field: 'content' }]}
-          options={{ toolbar: false, pageSize:10, paginationType: 'stepped' }}
+          columns={[{ title: 'S No.', field: 'index' }, { title: 'Content', field: 'content' }]}
+          options={{ toolbar: true, pageSize:5, paginationType: 'stepped' }}
           title=''
-          data={this.props.mapDates[this.state.selectedDate].map((e) => (
-            { 'index': e, 'content': this.props.items[e] }
+          data={this.props.mapDates[this.state.selectedDate].map((e, v) => (
+            { 'index': v + 1, 'content': this.props.items[e] }
           ))}
         />
       ) : (
