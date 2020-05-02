@@ -4,6 +4,7 @@ import { TodoCard } from './TaskCard';
 import { Notepad } from './Notepad';
 import '../styles/index.css';
 import { Menu } from './Menu';
+import { Table } from './Table';
 
 export class Dashboard extends React.PureComponent<{}, State> {
   state = {
@@ -23,6 +24,7 @@ export class Dashboard extends React.PureComponent<{}, State> {
             <TodoCard onTaskAdd={this.updateTaskCount} />
           </Route>
           <Route path='/notes' component={Notepad}></Route>
+          <Route path='/table' component={Table}></Route>
         </Switch>
       </>
     );
