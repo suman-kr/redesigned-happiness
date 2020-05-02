@@ -14,11 +14,10 @@ export class Table extends React.Component<Props, {}> {
   }
   render() {
     return (
-      <table id="table">
+      <table id="table" contentEditable={true}>
         <tbody id="body">
           <tr className="row">
             <td id="data" contentEditable={true}>
-              <div className="block"></div>
             </td>
           </tr>
         </tbody>
