@@ -3,3 +3,5 @@
 * To install and start the app.
 
 `yarn && yarn start`
+
+** Start notepad demo: `/table`
