@@ -4,4 +4,4 @@
 
 `yarn && yarn start`
 
-** Start notepad demo: `/table`
+**Start notepad demo: `/table`
