@@ -1,27 +1,23 @@
 import * as React from "react";
-import '../styles/notepad.css';
+import "../styles/notepad.css";
 export class Table extends React.Component<Props, {}> {
-  tableStyle: React.CSSProperties = {
-    maxWidth: "500px",
-    maxHeight: "500px",
-    background: "white",
-    border: "1px solid black",
-    width: "500px",
-    height: "500px",
-  };
   constructor(props: Props) {
     super(props);
   }
   render() {
     return (
-      <table id="table" contentEditable={true}>
-        <tbody id="body">
-          <tr className="row">
-            <td id="data" contentEditable={true}>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      /**
+       * cAN BE USED LATER!!!!
+       */
+      //   <table id="table" contentEditable={true}>
+      //     <tbody id="body">
+      //       <tr className="row">
+      //         <td id="data" contentEditable={true}>
+      //         </td>
+      //       </tr>
+      //     </tbody>
+      //   </table>
+      <div contentEditable={true} id="table"></div>
     );
   }
 }
