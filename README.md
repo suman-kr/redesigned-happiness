@@ -1,7 +1,12 @@
-# Task management and Notes writing App
-## Built on React 
+# Task management app (under development)
+
+Description
+---
+Task management app built using React. User can create tasks and assign due dates and labels. Tasks can be filtered using labels. User can add their own labels.
+
+
 * To install and start the app.
 
 `yarn && yarn start`
 
-*Start notepad demo: `/table`
+UI developed using [material-ui](https://material-ui.com/) :heart:
