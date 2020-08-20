@@ -9,4 +9,4 @@ Task management app built using React. User can create tasks and assign due date
 
 `yarn && yarn start`
 
-UI developed using [material-ui](https://material-ui.com/) :heart:
+UI designed using [material-ui](https://material-ui.com/) :heart:
