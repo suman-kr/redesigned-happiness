@@ -13,5 +13,5 @@ The notepad app has been moved to seperate project :sweat_smile: [Remarques](htt
 
 `yarn && yarn start`
 
-UI designed using [material-ui](https://material-ui.com/) :heart:
-Calendar used [react-calendar](https://github.com/wojtekmaj/react-calendar)
+UI designed using [material-ui](https://material-ui.com/) :heart:  
+Calendar used [react-calendar](https://github.com/wojtekmaj/react-calendar) :calendar:
