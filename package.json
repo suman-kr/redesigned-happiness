@@ -44,7 +44,7 @@
     "babel-loader": "^8.1.0",
     "lowdb": "^1.0.0",
     "material-table": "^1.57.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.13.1",
     "react-calendar": "^3.0.1",
     "react-date-picker": "^8.0.1",
